@@ -4,6 +4,6 @@ namespace ShopappES.Domain
     {
         public int OrderId { get; set; }
         public Guid UserId { get; set; }
-        public ICollection<OrderDetail> orderDetails = null;
+        public ICollection<OrderDetail> orderDetails = new HashSet<OrderDetail>();
     }
 }

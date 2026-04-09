@@ -1,7 +1,12 @@
+using ShopappES.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//Inject DI Service
+builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
