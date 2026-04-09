@@ -2,6 +2,13 @@ using ShopappES.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Logging.AddSimpleConsole(options =>
+{
+    options.IncludeScopes = true;
+    options.SingleLine = true; 
+    options.TimestampFormat = "yyyy-MM-dd HH:mm:ss "; 
+});
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
