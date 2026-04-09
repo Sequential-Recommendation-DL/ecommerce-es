@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": "lib",
+    "outDir": "dist",
+    "target": "ESNext",
+    "module": "commonjs",
+    "moduleResolution": "bundler",
+    "declaration": true,
+    "strict": true,
+    "paths": {
+      "@/*": ["lib/*"]
+    },
+    "ignoreDeprecations": "6.0"
+  }
+}
