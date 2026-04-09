@@ -1,4 +1,5 @@
 {
+  "version": "1.0.0",
   "private": true,
   "workspaces": [
     "e-commerce-app",
@@ -6,10 +7,25 @@
   ],
   "scripts": {
     "dev": "yarn workspace e-commerce-app dev",
-    "build": "yarn workspace e-commerce-app build",
+    "build": "yarn lint && yarn workspace e-commerce-app build",
     "start": "yarn workspace e-commerce-app start",
-    "lint": "yarn workspace e-commerce-app lint",
+    "lint": "yarn workspace e-commerce-app lint && yarn workspace @packages/core lint",
     "test": "yarn workspace e-commerce-app test",
-    "test:ci": "yarn workspace e-commerce-app test:ci"
+    "test:ci": "yarn workspace e-commerce-app test:ci",
+    "check:circular": "yarn workspace @packages/core check:circular"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.5",
+    "@types/node": "^20",
+    "@typescript-eslint/eslint-plugin": "^8.58.1",
+    "@typescript-eslint/parser": "^8.58.1",
+    "eslint": "^9",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-import": "^2.32.0",
+    "jest": "^30.3.0",
+    "madge": "^8.0.0",
+    "ts-jest": "^29.4.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5"
   }
 }
