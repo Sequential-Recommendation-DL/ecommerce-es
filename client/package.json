@@ -1,0 +1,15 @@
+{
+  "private": true,
+  "workspaces": [
+    "e-commerce-app",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "yarn workspace e-commerce-app dev",
+    "build": "yarn workspace e-commerce-app build",
+    "start": "yarn workspace e-commerce-app start",
+    "lint": "yarn workspace e-commerce-app lint",
+    "test": "yarn workspace e-commerce-app test",
+    "test:ci": "yarn workspace e-commerce-app test:ci"
+  }
+}
