@@ -1,4 +1,3 @@
-
 namespace ShopappES.Domain
 {
     public class Category
@@ -6,6 +5,6 @@ namespace ShopappES.Domain
         public int CategoryId { get; set; }
         public string CategoryName { get; set; } = string.Empty;
         public string CategoryDescription { get; set; } = string.Empty;
-        public ICollection<Product> products = null;
+        public ICollection<Product> products = new HashSet<Product>();
     }
 }
