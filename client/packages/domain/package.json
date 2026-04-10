@@ -1,0 +1,16 @@
+{
+  "name": "@packages/domain",
+  "version": "1.0.0",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "dev": "tsup lib/index.ts --watch",
+    "build": "yarn lint && tsup lib/index.ts --format esm,cjs --dts",
+    "lint": "eslint lib && yarn check:circular",
+    "check:circular": "yarn madge lib --circular --ts-config tsconfig.json --extensions ts,tsx"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.1"
+  }
+}
