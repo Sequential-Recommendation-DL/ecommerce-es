@@ -1,5 +1,9 @@
+using Marten.Services;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using ShopappES.Application.UnitOfWork;
 using ShopappES.Infrastructure;
+using ShopappES.Infrastructure.Persistence.Postgres.MapperProfile;
+using ShopappES.Infrastructure.Persistence.Postgres.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,14 +14,17 @@ builder.Logging.AddSimpleConsole(options =>
     options.TimestampFormat = "yyyy-MM-dd HH:mm:ss ";
 });
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 //Inject DI Service
-builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services
+    .AddPostgresService(builder.Configuration)
+    .AddAutoMapperService(builder.Configuration)
+    .AddSwaggerGen()
+    .AddEndpointsApiExplorer()
+    .AddScoped<IShopappESUnitOfWork, ShopappESUnitOfWork>()
+    .AddHealthChecks()
+;
 
-builder.Services.AddHealthChecks()
-    .AddNpgSql(builder.Configuration.GetConnectionString("Postgres")!); // Kiểm tra luôn cả DB cho chắc
 var app = builder.Build();
 
 app.MapHealthChecks("/", new HealthCheckOptions
@@ -29,7 +36,7 @@ app.MapHealthChecks("/", new HealthCheckOptions
         var response = new
         {
             status = report.Status.ToString(),
-            info = $"HelloWorld/{Environment.MachineName}", 
+            info = $"HelloWorld/{Environment.MachineName}",
             database = report.Entries.ContainsKey("npgsql") ? report.Entries["npgsql"].Status.ToString() : "Not Checked",
             timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         };

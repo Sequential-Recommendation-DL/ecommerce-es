@@ -10,15 +10,19 @@ namespace ShopappES.Infrastructure;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddPostgresService(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("Postgres");
         services.AddDbContext<ShopappESDbContext>(options =>
             options.UseNpgsql(connectionString));
-
-        services.AddAutoMapper(cfg => { }, typeof(MapperProfile));
-        services.AddScoped<IShopappESUnitOfWork, ShopappESUnitOfWork>();
-
+        return services;
+    }
+    public static IServiceCollection AddAutoMapperService(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddAutoMapper(crf =>
+        {
+            //Mapper Class in here
+        }, typeof(MapperProfile));
         return services;
     }
 }
