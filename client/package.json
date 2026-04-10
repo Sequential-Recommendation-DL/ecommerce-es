@@ -9,6 +9,7 @@
     "dev": "yarn workspace e-commerce-app dev",
     "build": "yarn lint && yarn workspace e-commerce-app build",
     "build:core": "yarn workspace @packages/core lint && yarn workspace @packages/core build",
+    "build:domain": "yarn workspace @packages/domain lint && yarn workspace @packages/domain build",
     "start": "yarn workspace e-commerce-app start",
     "lint": "yarn workspace e-commerce-app lint && yarn workspace @packages/core lint",
     "test": "yarn workspace e-commerce-app test",
