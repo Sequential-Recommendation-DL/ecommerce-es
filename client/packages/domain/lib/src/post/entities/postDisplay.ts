@@ -1,10 +1,8 @@
-class PostDisplay {
-  constructor(
-    private userId: number,
-    private id: number,
-    private title: string,
-    private body: string
-  ) {}
+interface PostDisplay {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
 }
 
-export { PostDisplay };
+export type { PostDisplay };

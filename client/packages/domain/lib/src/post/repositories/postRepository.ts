@@ -11,4 +11,4 @@ interface PostRepository {
   }): Promise<Either<Failure, PostDisplay[]>>;
 }
 
-export { PostRepository };
+export type { PostRepository };
