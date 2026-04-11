@@ -11,6 +11,9 @@
     "test:ci": "jest --ci --coverage --no-cache --passWithNoTests"
   },
   "dependencies": {
+    "@packages/core": "*",
+    "@packages/data": "*",
+    "@packages/domain": "*",
     "next": "16.2.2",
     "react": "19.2.4",
     "react-dom": "19.2.4"
