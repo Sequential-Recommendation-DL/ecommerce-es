@@ -7,4 +7,4 @@ interface UseCase<ReturnType, ParamsType> {
 
 type NoParams = {};
 
-export { UseCase, NoParams };
+export type { UseCase, NoParams };

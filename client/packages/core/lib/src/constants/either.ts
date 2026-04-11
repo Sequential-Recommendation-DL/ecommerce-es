@@ -10,4 +10,15 @@ type Right<R> = {
 
 type Either<L, R> = Left<L> | Right<R>;
 
-export { Either };
+const left = <L>(value: L): Left<L> => ({
+  type: "left",
+  value
+});
+
+const right = <R>(value: R): Right<R> => ({
+  type: "right",
+  value
+});
+
+export type { Either };
+export { right, left };
