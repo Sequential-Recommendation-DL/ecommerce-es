@@ -10,6 +10,9 @@
     "lint": "eslint lib && yarn check:circular",
     "check:circular": "yarn madge lib --circular --ts-config tsconfig.json --extensions ts,tsx"
   },
+  "dependencies": {
+    "@packages/core": "*"
+  },
   "devDependencies": {
     "tsup": "^8.5.1"
   }
