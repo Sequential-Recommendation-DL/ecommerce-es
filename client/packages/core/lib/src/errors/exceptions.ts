@@ -2,6 +2,7 @@ class AppException extends Error {
   constructor(message: string) {
     super(message);
     this.name = "AppException";
+    Object.setPrototypeOf(this, new.target.prototype);
   }
 }
 
@@ -42,6 +43,7 @@ class UnknownException extends AppException {
 }
 
 export {
+  AppException,
   AuthenticationException,
   DatabaseException,
   PermissionException,
