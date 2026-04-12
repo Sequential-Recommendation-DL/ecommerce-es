@@ -1,12 +1,11 @@
-namespace ShopappES.Domain.Enums
+namespace ShopappES.Domain.Enums;
+
+public enum OrderStatus
 {
-    public enum OrderStatus
-    {
-        Pending,
-        Confirmed,
-        Shipping,
-        Shipped,
-        Delivered,
-        Cancelled
-    }
+    Pending,
+    Confirmed,
+    Shipping,
+    Shipped,
+    Delivered,
+    Cancelled
 }
