@@ -1,9 +1,7 @@
-using Marten.Services;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using ShopappES.Application.UnitOfWork;
+using ShopappES.Application;
 using ShopappES.Infrastructure;
-using ShopappES.Infrastructure.Persistence.Postgres.MapperProfile;
-using ShopappES.Infrastructure.Persistence.Postgres.Repositories;
+using ShopappES.Infrastructure.Persistence.Postgres.DataContext;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,14 +12,38 @@ builder.Logging.AddSimpleConsole(options =>
     options.TimestampFormat = "yyyy-MM-dd HH:mm:ss ";
 });
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new() { Title = "EcommerceES API Document", Version = "v1" });
+    c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+    {
+        Description = "JWT Authorization header using the Bearer scheme.",
+        Name = "Authorization",
+        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+        Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+    c.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
+    {
+        {
+            new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+            {
+                Reference = new Microsoft.OpenApi.Models.OpenApiReference
+                {
+                    Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
+});
 
 //Inject DI Service
 builder.Services
-    .AddPostgresService(builder.Configuration)
-    .AddAutoMapperService(builder.Configuration)
-    .AddSwaggerGen()
-    .AddEndpointsApiExplorer()
-    .AddScoped<IShopappESUnitOfWork, ShopappESUnitOfWork>()
+    .AddInfrastructure(builder.Configuration)
+    .AddApplication()
     .AddHealthChecks()
 ;
 
@@ -53,6 +75,15 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<ShopappESDbContext>();
+    // var userManager = scope.ServiceProvider.GetRequiredService<Microsoft.AspNetCore.Identity.UserManager<Domain.Entities.AppUser>>();
+    // var roleManager = scope.ServiceProvider.GetRequiredService<Microsoft.AspNetCore.Identity.RoleManager<Microsoft.AspNetCore.Identity.IdentityRole>>();
+
+    context.Database.EnsureCreated();
+}
 app.Run();
 
 
