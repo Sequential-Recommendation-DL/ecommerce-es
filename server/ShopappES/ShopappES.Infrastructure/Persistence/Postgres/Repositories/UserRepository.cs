@@ -1,12 +1,11 @@
 using AutoMapper;
-using ShopappES.Application.Repositories;
-using ShopappES.Domain;
+using ShopappES.Domain.Entity;
 using ShopappES.Infrastructure.Persistence.Postgres.DataContext;
 
 namespace ShopappES.Infrastructure.Persistence.Postgres.Repositories
 {
 
-    public class UserRepository : IUserRepository
+    public class UserRepository 
     {
         private readonly ShopappESDbContext context;
         private readonly IMapper mapper;
@@ -18,7 +17,7 @@ namespace ShopappES.Infrastructure.Persistence.Postgres.Repositories
 
         }
 
-        public User FindById(Guid userId)
+        public User? FindById(Guid userId)
         {
             throw new NotImplementedException();
         }

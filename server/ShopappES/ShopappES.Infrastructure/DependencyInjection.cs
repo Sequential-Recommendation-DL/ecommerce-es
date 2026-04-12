@@ -1,28 +1,24 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ShopappES.Application.UnitOfWork;
+using ShopappES.Domain.Intefaces;
 using ShopappES.Infrastructure.Persistence.Postgres.DataContext;
 using ShopappES.Infrastructure.Persistence.Postgres.MapperProfile;
 using ShopappES.Infrastructure.Persistence.Postgres.Repositories;
 
-namespace ShopappES.Infrastructure;
-
-public static class DependencyInjection
+namespace ShopappES.Infrastructure
 {
-    public static IServiceCollection AddPostgresService(this IServiceCollection services, IConfiguration configuration)
+    public static class DependencyInjection
     {
-        var connectionString = configuration.GetConnectionString("Postgres");
-        services.AddDbContext<ShopappESDbContext>(options =>
-            options.UseNpgsql(connectionString));
-        return services;
-    }
-    public static IServiceCollection AddAutoMapperService(this IServiceCollection services, IConfiguration configuration)
-    {
-        services.AddAutoMapper(crf =>
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            //Mapper Class in here
-        }, typeof(MapperProfile));
-        return services;
+            var connectionString = configuration.GetConnectionString("Postgres");
+            services.AddDbContext<ShopappESDbContext>(options =>
+                options.UseNpgsql(connectionString));
+            services.AddScoped<IShopappESUnitOfWork, ShopappESUnitOfWork>();
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            return services;
+
+        }
     }
 }

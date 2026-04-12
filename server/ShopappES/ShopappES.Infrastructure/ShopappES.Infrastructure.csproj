@@ -2,11 +2,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ShopappES.Application\ShopappES.Application.csproj" />
+    <ProjectReference Include="..\ShopappES.Domain\ShopappES.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Npgsql" Version="9.0.4" />
-    <PackageReference Include="AutoMapper" Version="16.1.1" />
     <PackageReference Include="Marten" Version="8.29.2" />
     <PackageReference Include="Marten.AspNetCore" Version="8.29.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
