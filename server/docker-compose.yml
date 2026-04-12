@@ -1,6 +1,8 @@
 services:
   postgres:
-    image: postgres:16-alpine
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: marten-db
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
