@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using ShopappES.Domain.Common;
 
 namespace ShopappES.Domain
 {
-    public class Product
+    public class Product : BaseEntity
     {
         [Key]
         public int ProductId { get; set; }

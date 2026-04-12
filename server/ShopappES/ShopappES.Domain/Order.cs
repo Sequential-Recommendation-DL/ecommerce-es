@@ -1,8 +1,9 @@
 using System.ComponentModel.DataAnnotations;
+using ShopappES.Domain.Common;
 
 namespace ShopappES.Domain
 {
-    public class Order
+    public class Order :BaseEntity
     {
         [Key]
         public int OrderId { get; set; }

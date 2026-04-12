@@ -1,8 +1,9 @@
 using System.ComponentModel.DataAnnotations;
+using ShopappES.Domain.Common;
 
 namespace ShopappES.Domain
 {
-    public class User
+    public class User : BaseEntity
     {
         [Key]
         public Guid UserId { get; set; } = new Guid();
