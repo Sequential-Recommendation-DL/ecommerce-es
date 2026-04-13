@@ -3,7 +3,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ShopappES.Domain.Intefaces;
 using ShopappES.Infrastructure.Persistence.Postgres.DataContext;
-using ShopappES.Infrastructure.Persistence.Postgres.MapperProfile;
 using ShopappES.Infrastructure.Persistence.Postgres.Repositories;
 
 namespace ShopappES.Infrastructure
