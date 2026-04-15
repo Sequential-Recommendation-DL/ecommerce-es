@@ -2,6 +2,7 @@ using ShopappES.Domain.Entity;
 using ShopappES.Domain.Enums;
 using ShopappES.Application.Features.Payment.DTOs;
 using ShopappES.Application.Features.Shipping.DTOs;
+using ShopappES.Application.Features.Auth.DTOs;
 
 namespace ShopappES.Application.Features.Order.DTOs;
 

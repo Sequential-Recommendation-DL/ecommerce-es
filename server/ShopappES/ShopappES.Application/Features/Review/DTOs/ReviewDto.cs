@@ -1,5 +1,6 @@
 using ShopappES.Domain.Entity;
 using ShopappES.Application.Features.Product.DTOs;
+using ShopappES.Application.Features.Auth.DTOs;
 
 namespace ShopappES.Application.Features.Review.DTOs;
 
