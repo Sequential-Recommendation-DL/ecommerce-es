@@ -1,17 +1,17 @@
-namespace Application.Features.Auth.Validators;
+namespace ShopappES.Application.Features.Auth.Validators;
 
 using Application.Features.Auth.Commands;
 using FluentValidation;
 
-public class RegisterValidator : AbstractValidator<LoginCommand>
+public class LoginValidator : AbstractValidator<LoginCommand>
 {
-    public RegisterValidator()
+    public LoginValidator()
     {
-        RuleFor(x => x.Dto.Email)
+        RuleFor(x => x.Email)
             .NotEmpty().WithMessage("Email is required.")
             .EmailAddress().WithMessage("Invalid email format.");
 
-        RuleFor(x => x.Dto.Password)
+        RuleFor(x => x.Password)
             .NotEmpty().WithMessage("Password is required.");
     }
 }

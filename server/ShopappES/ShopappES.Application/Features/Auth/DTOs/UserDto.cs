@@ -16,16 +16,15 @@ public class UserDto
     public string? Avatar { get; set; }
     public DateTime? BirthDate { get; set; }
     public Gender Gender { get; set; } = Gender.Other;
-    public bool IsEmailVerified { get; set; }
-    public bool IsPhoneVerified { get; set; }
+    public bool IsEmailVerified { get; set; } = true;
+    public bool IsPhoneVerified { get; set; } = false;
     public bool IsActive { get; set; } = true;
     public DateTime? LastLoginAt { get; set; }
     public List<OrderDto>? Orders { get; set; }
     public List<AddressDto>? Addresses { get; set; }
     public List<ReviewDto>? Reviews { get; set; }
 }
-public class AuthResponseDto
-{
+public class AuthResponseDto {
     public string Token { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
     public string FullName { get; set; } = string.Empty;
