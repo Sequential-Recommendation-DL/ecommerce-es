@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ShopappES.Application.Common;
+using ShopappES.Application.Features.Auth.Commands;
 using ShopappES.Application.Features.Auth.DTOs;
 
 namespace ShopappES.Api.Controllers

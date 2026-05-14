@@ -24,7 +24,8 @@ public class UserDto
     public List<AddressDto>? Addresses { get; set; }
     public List<ReviewDto>? Reviews { get; set; }
 }
-public class AuthResponseDto {
+public class AuthResponseDto
+{
     public string Token { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
     public string FullName { get; set; } = string.Empty;

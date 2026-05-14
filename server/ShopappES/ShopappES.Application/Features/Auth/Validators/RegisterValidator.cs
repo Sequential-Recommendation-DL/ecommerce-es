@@ -2,8 +2,10 @@ namespace Application.Features.Auth.Validators;
 
 using Application.Features.Auth.Commands;
 using FluentValidation;
+using ShopappES.Application.Features.Auth.Commands;
+using ShopappES.Application.Features.Auth.Validators;
 
-public class RegisterValidator : AbstractValidator<LoginCommand>
+public class RegisterValidator : AbstractValidator<LoginValidator>
 {
     public RegisterValidator()
     {
