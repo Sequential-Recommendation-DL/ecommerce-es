@@ -1,25 +1,40 @@
-using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using ShopappES.Application.Features.Auth.Interfaces;
 using ShopappES.Domain.Entity;
 using ShopappES.Infrastructure.Persistence.Postgres.DataContext;
 
-namespace ShopappES.Infrastructure.Persistence.Postgres.Repositories
+namespace ShopappES.Infrastructure.Persistence.Postgres.Repositories;
+
+public class UserRepository : IUserRepository
 {
+    private readonly ShopappESDbContext _context;
 
-    public class UserRepository 
+    public UserRepository(ShopappESDbContext context)
     {
-        private readonly ShopappESDbContext context;
-        private readonly IMapper mapper;
+        _context = context;
+    }
 
-        public UserRepository(ShopappESDbContext context, IMapper mapper)
-        {
-            this.context = context ?? throw new ArgumentNullException(nameof(context));
-            this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+    public async Task<User?> GetByEmailAsync(string email)
+    {
+        return await _context.Users.FirstOrDefaultAsync(u => u.Email == email && !u.IsDeleted);
+    }
 
-        }
+    public async Task<User?> GetByIdAsync(Guid id)
+    {
+        return await _context.Users.FindAsync(id);
+    }
 
-        public User? FindById(Guid userId)
-        {
-            throw new NotImplementedException();
-        }
+    public async Task<User> AddAsync(User user)
+    {
+        user.Id = Guid.NewGuid();
+        user.CreatedAt = DateTime.UtcNow;
+        await _context.Users.AddAsync(user);
+        await _context.SaveChangesAsync();
+        return user;
+    }
+
+    public async Task<bool> ExistsAsync(string email)
+    {
+        return await _context.Users.AnyAsync(u => u.Email == email && !u.IsDeleted);
     }
 }
