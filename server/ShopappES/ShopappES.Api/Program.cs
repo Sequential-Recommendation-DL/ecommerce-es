@@ -42,6 +42,11 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 //Inject DI Service
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+    });
 builder.Services
     .AddInfrastructure(builder.Configuration)
     .AddApplication()
@@ -75,7 +80,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.MapControllers();
 
 using (var scope = app.Services.CreateScope())
 {

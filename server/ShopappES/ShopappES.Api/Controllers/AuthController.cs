@@ -19,7 +19,14 @@ namespace ShopappES.Api.Controllers
         [ProducesResponseType(typeof(ApiResponse<AuthResponseDto>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Register([FromBody] RegisterDto dto)
         {
-            var result = await _mediator.Send(new RegisterCommand(dto));
+            var command = new RegisterCommand
+            {
+                Email = dto.Email,
+                Password = dto.Password,
+                RePassword = dto.RePassword,
+                FullName = dto.FullName
+            };
+            var result = await _mediator.Send(command);
             return StatusCode(result.StatusCode, result);
         }
 
@@ -28,7 +35,12 @@ namespace ShopappES.Api.Controllers
         [ProducesResponseType(typeof(ApiResponse<AuthResponseDto>), StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Login([FromBody] LoginDto dto)
         {
-            var result = await _mediator.Send(new LoginCommand(dto));
+            var command = new LoginCommand
+            {
+                Email = dto.Email,
+                Password = dto.Password
+            };
+            var result = await _mediator.Send(command);
             return StatusCode(result.StatusCode, result);
         }
     }

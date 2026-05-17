@@ -29,6 +29,7 @@ public class UserRepository : IUserRepository
         user.Id = Guid.NewGuid();
         user.CreatedAt = DateTime.UtcNow;
         await _context.Users.AddAsync(user);
+        await _context.SaveChangesAsync();
         return user;
     }
 
